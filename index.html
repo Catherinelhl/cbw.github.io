@@ -5,7 +5,7 @@
   
 
 
-<html class="theme-next pisces use-motion" lang="zh-Hans">
+<html class="theme-next muse use-motion" lang="zh-Hans">
 <head>
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -111,7 +111,7 @@
   var NexT = window.NexT || {};
   var CONFIG = {
     root: '/',
-    scheme: 'Pisces',
+    scheme: 'Muse',
     sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: true,
     tabs: true,
@@ -382,42 +382,41 @@
           
             <p> 什么都不重要，重要的是我要把这个折腾我的细心给纪录下来。</p>
 <p> 对，这是由Hexo+Github搭建起来的一个博客，然后再配合自己买的域名，完美的实现了一个你看到的正正经经的博客。</p>
-<h3 id="环境配置"><a href="#环境配置" class="headerlink" title="环境配置"></a>环境配置</h3><p>&gt;</p>
-<blockquote>
+<h2 id="环境配置"><a href="#环境配置" class="headerlink" title="环境配置"></a>环境配置</h2><blockquote>
 <ul>
 <li>安装node，直接去<a href="https://nodejs.org/en/" target="_blank" rel="external">node官网</a>下载安装即可，安装后就可以在终端使用npm命令了</li>
 <li>安装git</li>
 <li>在github上创建一个仓库：YourName.github.io </li>
 </ul>
 </blockquote>
-<p>  谨记：这里创建的库的YourName一定要跟你的Github当前的组织相同的名字；例如：<a href="https://github.com/Catherine/Catherine.github.io" target="_blank" rel="external">https://github.com/Catherine/Catherine.github.io</a></p>
-<h3 id="安装Hexo"><a href="#安装Hexo" class="headerlink" title="安装Hexo"></a>安装Hexo</h3><p>新建一个文件夹，作为Hexo的根目录，然后通过终端进入到当前文件夹</p>
+<p>  谨记：这里创建的库的YourName一定要跟你的Github当前的组织相同的名字；例如：<a href="https://github.com/Cathy/Cathy.github.io" target="_blank" rel="external">https://github.com/Cathy/Cathy.github.io</a></p>
+<h2 id="安装Hexo"><a href="#安装Hexo" class="headerlink" title="安装Hexo"></a>安装Hexo</h2><p>新建一个文件夹，作为Hexo的根目录，然后通过终端进入到当前文件夹</p>
 <p>命令三步走：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">sudo npm install -g hexo </div><div class="line"> </div><div class="line">hexo init </div><div class="line"></div><div class="line">hexo generate</div></pre></td></tr></table></figure>
-<h3 id="本地预览"><a href="#本地预览" class="headerlink" title="本地预览"></a>本地预览</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo s --debug</div></pre></td></tr></table></figure>
-<p>以上步骤完成后，在本地就已经能看到默认的Hexo博客服务了<br>通过以上步骤，在浏览器中输入<a href="localhost:4000" target="_blank" rel="external">localhost:4000</a>即可看到</p>
-<h3 id="Github预览"><a href="#Github预览" class="headerlink" title="Github预览"></a>Github预览</h3><p>本地已经好了，代表博客已经有了，如果想要在线上也能被访问到，那么就考虑把它从本地推送到Github上就行。<br>打开初始化Hexo的根目录，打开文件_config.yml，在文件底部加入</p>
+<h2 id="本地预览"><a href="#本地预览" class="headerlink" title="本地预览"></a>本地预览</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo s --debug</div></pre></td></tr></table></figure>
+<p>以上步骤完成后，在本地就已经能看到默认的Hexo博客服务了;在浏览器中输入<a href="localhost:4000" target="_blank" rel="external">localhost:4000</a>即可看到</p>
+<h2 id="Github预览"><a href="#Github预览" class="headerlink" title="Github预览"></a>Github预览</h2><p>本地已经好了，代表博客已经有了，如果想要在线上也能被访问到，那么就考虑把它从本地推送到Github上就行。<br>打开初始化Hexo的根目录，打开文件_config.yml，在文件底部加入</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">deploy:</div><div class="line">  type: git</div><div class="line">  repo: https://github.com/yourname/yourname.github.io.git</div><div class="line">  branch: master</div></pre></td></tr></table></figure>
 <p>  谨记：冒号和后面的值之间是有一个空格的，之前我就是没注意这个，导致一致访问不到。</p>
 <p>  然后保存，推送，这里有两种方式：</p>
-<ul>
-<li><p>###第一种</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"> hexo generate</div><div class="line"> </div><div class="line"> hexo deploy</div><div class="line">```  </div><div class="line"></div><div class="line">⚠️</div></pre></td></tr></table></figure>
-<p>hexo deploy </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"> </div><div class="line">这一步是推送的意思，是有对应的输出的，如果推送成功，你会在最后一行信息里面看到</div></pre></td></tr></table></figure>
-<p> INFO  Deploy done: git</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">当然，可能在推送中，很多人并不能一次性成功，可能会出现：</div></pre></td></tr></table></figure>
-<p>Deployer not found: git</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">这个错误，那我们可以通过</div></pre></td></tr></table></figure>
-<p>npm install hexo-deployer-git –save</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">   </div><div class="line">   这个命令来解决，然后重新保存推送即可。 [解决详情](https://www.v2ex.com/t/175940)</div><div class="line">* ###第二种</div><div class="line">这是我更喜欢的一种方式，简单</div></pre></td></tr></table></figure>
-<p>hexo g -d<br>```<br>这一种就是直接一次性保存并且推送了，如果成功了也会跟第一种有同样的输出</p>
-<h3 id="主题配置"><a href="#主题配置" class="headerlink" title="主题配置"></a>主题配置</h3><p>打开Hexo根目录里面_config.yml文件，全局搜索“theme”，你会发现它对应的值是：landscape；对，这就是我们的主题配置。Hexo默认使用主题landscape，一般网上普遍用的是next主题，当然还有很多很多主题，我们可以根据自己的喜好去下载，然后赋值即可。具体操作直接通过<a href="http://theme-next.iissnan.com/" target="_blank" rel="external">next官网</a>提供的操作步骤，即可进行主题替换。</p>
-</li>
-</ul>
+<h3 id="第一种"><a href="#第一种" class="headerlink" title="第一种"></a>第一种</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">hexo generate</div><div class="line"></div><div class="line">hexo deploy</div></pre></td></tr></table></figure>
+<p> 注意:</p>
 <blockquote>
-<p> 写下这些，只是为了今后自己再遇到同样的问题不至于在相同的问题里面周旋太久。</p>
-<p>以上，谢谢</p>
+<p> hexo deploy </p>
+</blockquote>
+<p>   这一步是推送的意思，是有对应的输出的，如果推送成功，你会在最后一行信息里面看到</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">INFO  Deploy done: git</div></pre></td></tr></table></figure>
+<p>   当然，可能在推送中，很多人并不能一次性成功，可能会出现：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Deployer not found: git</div></pre></td></tr></table></figure>
+<p>   这个错误，那我们可以通过</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install hexo-deployer-git --save</div></pre></td></tr></table></figure>
+<p>   这个命令来解决，然后重新保存推送即可。 <a href="https://www.v2ex.com/t/175940" target="_blank" rel="external">解决详情</a></p>
+<h3 id="第二种"><a href="#第二种" class="headerlink" title="第二种"></a>第二种</h3><p> 这是我更喜欢的一种方式，简单;直接输入：</p>
+<pre><code>hexo g -d
+</code></pre><p> 这一种就是直接一次性保存并且推送了，如果成功了也会跟第一种有同样的输出</p>
+<h2 id="主题配置"><a href="#主题配置" class="headerlink" title="主题配置"></a>主题配置</h2><p>打开Hexo根目录里面_config.yml文件，全局搜索“theme”，你会发现它对应的值是：landscape；对，这就是我们的主题配置。Hexo默认使用主题landscape，一般网上普遍用的是next主题，当然还有很多很多主题，我们可以根据自己的喜好去下载，然后赋值即可。具体操作直接通过<a href="http://theme-next.iissnan.com/" target="_blank" rel="external">next官网</a>提供的操作步骤，即可进行主题替换。</p>
+<blockquote>
+<p> 写下这些，只是为了今后自己再遇到同样的问题不至于在相同的问题里面周旋太久。<br>以上，谢谢</p>
 </blockquote>
 
           
@@ -742,7 +741,7 @@
 <div class="theme-info">
   主题 -
   <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
-    NexT.Pisces
+    NexT.Muse
   </a>
 </div>
 
@@ -827,13 +826,6 @@
 
   
   
-
-
-  <script type="text/javascript" src="/js/src/affix.js?v=5.1.2"></script>
-
-  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.2"></script>
-
-
 
   
     <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
