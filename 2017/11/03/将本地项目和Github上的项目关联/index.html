@@ -94,18 +94,18 @@
 
 
 
-<meta name="description" content="To take the crown,will by heavy!">
+<meta name="description" content="将本地项目和Github上的项目关联好记性不如烂笔头边学边填，肯定还有很多不足，主要是还没有知其所以然我是采用的不用clone到本地的操作，直接把本地的与远程已经创建好的同项目名字的关联，然后pull远程文件，添加到本地，提交，推送到远程。 123456789101112131415git init                    //初始化本地git remote add origin g">
 <meta name="keywords" content="Git">
 <meta property="og:type" content="article">
 <meta property="og:title" content="将本地项目和Github上的项目关联">
 <meta property="og:url" content="http://xcatherine.cn/2017/11/03/将本地项目和Github上的项目关联/index.html">
 <meta property="og:site_name" content="Catherine&#39;s world">
-<meta property="og:description" content="To take the crown,will by heavy!">
+<meta property="og:description" content="将本地项目和Github上的项目关联好记性不如烂笔头边学边填，肯定还有很多不足，主要是还没有知其所以然我是采用的不用clone到本地的操作，直接把本地的与远程已经创建好的同项目名字的关联，然后pull远程文件，添加到本地，提交，推送到远程。 123456789101112131415git init                    //初始化本地git remote add origin g">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-11-03T06:38:49.000Z">
+<meta property="og:updated_time" content="2017-11-03T06:41:44.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="将本地项目和Github上的项目关联">
-<meta name="twitter:description" content="To take the crown,will by heavy!">
+<meta name="twitter:description" content="将本地项目和Github上的项目关联好记性不如烂笔头边学边填，肯定还有很多不足，主要是还没有知其所以然我是采用的不用clone到本地的操作，直接把本地的与远程已经创建好的同项目名字的关联，然后pull远程文件，添加到本地，提交，推送到远程。 123456789101112131415git init                    //初始化本地git remote add origin g">
 
 
 
@@ -356,7 +356,14 @@
       
 
       
-        
+        <h2 id="将本地项目和Github上的项目关联"><a href="#将本地项目和Github上的项目关联" class="headerlink" title="将本地项目和Github上的项目关联"></a>将本地项目和Github上的项目关联</h2><h4 id="好记性不如烂笔头"><a href="#好记性不如烂笔头" class="headerlink" title="好记性不如烂笔头"></a>好记性不如烂笔头</h4><h5 id="边学边填，肯定还有很多不足，主要是还没有知其所以然"><a href="#边学边填，肯定还有很多不足，主要是还没有知其所以然" class="headerlink" title="边学边填，肯定还有很多不足，主要是还没有知其所以然"></a>边学边填，肯定还有很多不足，主要是还没有知其所以然</h5><h6 id="我是采用的不用clone到本地的操作，直接把本地的与远程已经创建好的同项目名字的关联，然后pull远程文件，添加到本地，提交，推送到远程。"><a href="#我是采用的不用clone到本地的操作，直接把本地的与远程已经创建好的同项目名字的关联，然后pull远程文件，添加到本地，提交，推送到远程。" class="headerlink" title="我是采用的不用clone到本地的操作，直接把本地的与远程已经创建好的同项目名字的关联，然后pull远程文件，添加到本地，提交，推送到远程。"></a>我是采用的不用clone到本地的操作，直接把本地的与远程已经创建好的同项目名字的关联，然后pull远程文件，添加到本地，提交，推送到远程。</h6> <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">git init                    //初始化本地</div><div class="line"></div><div class="line">git remote add origin git@github.com:demo/demo.git</div><div class="line"></div><div class="line">rm .gitignore               //就是操作删除一个文件  不必须</div><div class="line"></div><div class="line">git pull origin master      //从github到本地</div><div class="line"></div><div class="line">git add .</div><div class="line"></div><div class="line">git status                  //查看当前状态，不必须</div><div class="line"></div><div class="line">git commit -m &quot;first&quot;       //提交信息</div><div class="line"></div><div class="line">git push origin master      //推送到远程</div></pre></td></tr></table></figure>
+<p> 这里可能会出现ssh key没有创建的情况，请参考下面。</p>
+<h4 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h4><ul>
+<li><a href="http://www.worldhello.net/gotgithub/03-project-hosting/010-new-project.html" target="_blank" rel="external">教程</a></li>
+<li><a href="http://www.cnblogs.com/fnng/archive/2011/08/25/2153807.html" target="_blank" rel="external">绑定SSH Key</a></li>
+<li><a href="http://www.bootcss.com/p/git-guide/" target="_blank" rel="external">git 指南</a></li>
+</ul>
+
       
     </div>
     
@@ -446,8 +453,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/uploads/catherine.jpg"
@@ -544,6 +560,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#将本地项目和Github上的项目关联"><span class="nav-number">1.</span> <span class="nav-text">将本地项目和Github上的项目关联</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#好记性不如烂笔头"><span class="nav-number">1.0.1.</span> <span class="nav-text">好记性不如烂笔头</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#边学边填，肯定还有很多不足，主要是还没有知其所以然"><span class="nav-number">1.0.1.1.</span> <span class="nav-text">边学边填，肯定还有很多不足，主要是还没有知其所以然</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#我是采用的不用clone到本地的操作，直接把本地的与远程已经创建好的同项目名字的关联，然后pull远程文件，添加到本地，提交，推送到远程。"><span class="nav-number">1.0.1.1.1.</span> <span class="nav-text">我是采用的不用clone到本地的操作，直接把本地的与远程已经创建好的同项目名字的关联，然后pull远程文件，添加到本地，提交，推送到远程。</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#参考资料"><span class="nav-number">1.0.2.</span> <span class="nav-text">参考资料</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
