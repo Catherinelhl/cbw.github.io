@@ -94,19 +94,19 @@
 
 
 
-<meta name="description" content="终于回来了，但是不知道自己内心是否已归。 无论怎样，我要up,up,up. 趁热打铁，来过一遍现在自己理解的Kotlin里面高阶函数的使用场景吧。现在对与kotlin还停留在表层，可能是因为自己对Java也深入了解得不够的原因吧。所以，根据目前自己了解到的五个高阶函数做做记忆的加固。 #####let、also、apply、run、with、T.run  let:允许，任由，让，随；假设；出租 a">
+<meta name="description" content="终于回来了，但是不知道自己内心是否已归。 无论怎样，我要up,up,up. 趁热打铁，来过一遍现在自己理解的Kotlin里面高阶函数的使用场景吧。现在对与kotlin还停留在表层，可能是因为自己对Java也深入了解得不够的原因吧。所以，根据目前自己了解到的五个高阶函数做做记忆的加固。 1let、also、apply、run、with、T.run  let:允许，任由，让，随；假设；出租 also:">
 <meta name="keywords" content="面试,Android,Kotlin">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Kotlin 之高阶函数let&#x2F;apply等区别已经使用场景">
 <meta property="og:url" content="http://xcatherine.cn/2018/07/06/Kotlin-之高阶函数let-apply等区别已经使用场景/index.html">
 <meta property="og:site_name" content="Catherine&#39;s world">
-<meta property="og:description" content="终于回来了，但是不知道自己内心是否已归。 无论怎样，我要up,up,up. 趁热打铁，来过一遍现在自己理解的Kotlin里面高阶函数的使用场景吧。现在对与kotlin还停留在表层，可能是因为自己对Java也深入了解得不够的原因吧。所以，根据目前自己了解到的五个高阶函数做做记忆的加固。 #####let、also、apply、run、with、T.run  let:允许，任由，让，随；假设；出租 a">
+<meta property="og:description" content="终于回来了，但是不知道自己内心是否已归。 无论怎样，我要up,up,up. 趁热打铁，来过一遍现在自己理解的Kotlin里面高阶函数的使用场景吧。现在对与kotlin还停留在表层，可能是因为自己对Java也深入了解得不够的原因吧。所以，根据目前自己了解到的五个高阶函数做做记忆的加固。 1let、also、apply、run、with、T.run  let:允许，任由，让，随；假设；出租 also:">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://xcatherine.cn/uploads/let.jpg">
-<meta property="og:updated_time" content="2018-07-06T11:00:41.274Z">
+<meta property="og:updated_time" content="2018-07-06T11:02:48.804Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Kotlin 之高阶函数let&#x2F;apply等区别已经使用场景">
-<meta name="twitter:description" content="终于回来了，但是不知道自己内心是否已归。 无论怎样，我要up,up,up. 趁热打铁，来过一遍现在自己理解的Kotlin里面高阶函数的使用场景吧。现在对与kotlin还停留在表层，可能是因为自己对Java也深入了解得不够的原因吧。所以，根据目前自己了解到的五个高阶函数做做记忆的加固。 #####let、also、apply、run、with、T.run  let:允许，任由，让，随；假设；出租 a">
+<meta name="twitter:description" content="终于回来了，但是不知道自己内心是否已归。 无论怎样，我要up,up,up. 趁热打铁，来过一遍现在自己理解的Kotlin里面高阶函数的使用场景吧。现在对与kotlin还停留在表层，可能是因为自己对Java也深入了解得不够的原因吧。所以，根据目前自己了解到的五个高阶函数做做记忆的加固。 1let、also、apply、run、with、T.run  let:允许，任由，让，随；假设；出租 also:">
 <meta name="twitter:image" content="http://xcatherine.cn/uploads/let.jpg">
 
 
@@ -371,7 +371,7 @@
         <p>终于回来了，但是不知道自己内心是否已归。</p>
 <p>无论怎样，我要up,up,up.</p>
 <p>趁热打铁，来过一遍现在自己理解的Kotlin里面高阶函数的使用场景吧。<br>现在对与kotlin还停留在表层，可能是因为自己对Java也深入了解得不够的原因吧。所以，根据目前自己了解到的五个高阶函数做做记忆的加固。</p>
-<p>#####let、also、apply、run、with、T.run</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">let、also、apply、run、with、T.run</div></pre></td></tr></table></figure>
 <ul>
 <li>let:允许，任由，让，随；假设；出租</li>
 <li>also:也；同样；并且；另外</li>
