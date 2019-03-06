@@ -1,0 +1,899 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Android,BlockChain," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="BTC Of BlockChain 参考文档以下两者皆可实现BTC的基本需求BlockChain BTC   获取当前钱包的余额     request method params     /balance GET String address    Request eg:1https://blockchain.info/balance?active=16ugnJ7pndAFJJfMwoSDFbN">
+<meta name="keywords" content="Android,BlockChain">
+<meta property="og:type" content="article">
+<meta property="og:title" content="BTC公链接入">
+<meta property="og:url" content="http://xcatherine.cn/2019/03/05/BTC公链接入/index.html">
+<meta property="og:site_name" content="Catherine&#39;s world">
+<meta property="og:description" content="BTC Of BlockChain 参考文档以下两者皆可实现BTC的基本需求BlockChain BTC   获取当前钱包的余额     request method params     /balance GET String address    Request eg:1https://blockchain.info/balance?active=16ugnJ7pndAFJJfMwoSDFbN">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-03-05T12:33:00.347Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="BTC公链接入">
+<meta name="twitter:description" content="BTC Of BlockChain 参考文档以下两者皆可实现BTC的基本需求BlockChain BTC   获取当前钱包的余额     request method params     /balance GET String address    Request eg:1https://blockchain.info/balance?active=16ugnJ7pndAFJJfMwoSDFbN">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://xcatherine.cn/2019/03/05/BTC公链接入/"/>
+
+
+
+
+
+  <title>BTC公链接入 | Catherine's world</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?50143dd916563cdf11e060b71cbaf79f";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Catherine's world</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Welcome</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/self/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://xcatherine.cn/2019/03/05/BTC公链接入/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Catherine">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/catherine.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Catherine's world">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">BTC公链接入</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-05T20:25:53+08:00">
+                2019-03-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/BlockChain/" itemprop="url" rel="index">
+                    <span itemprop="name">BlockChain</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="BTC-Of-BlockChain"><a href="#BTC-Of-BlockChain" class="headerlink" title="BTC Of BlockChain"></a>BTC Of BlockChain</h3><hr>
+<h5 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h5><h6 id="以下两者皆可实现BTC的基本需求"><a href="#以下两者皆可实现BTC的基本需求" class="headerlink" title="以下两者皆可实现BTC的基本需求"></a>以下两者皆可实现BTC的基本需求</h6><p><a href="https://www.blockchain.com/api" target="_blank" rel="external">BlockChain</a></p>
+<p><a href="https://btc.com/api-doc" target="_blank" rel="external">BTC</a></p>
+<hr>
+<ul>
+<li>获取当前钱包的余额</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>request</th>
+<th>method</th>
+<th>params</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>/balance</td>
+<td>GET</td>
+<td>String address</td>
+</tr>
+</tbody>
+</table>
+<h4 id="Request-eg"><a href="#Request-eg" class="headerlink" title="Request eg:"></a>Request eg:</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">https://blockchain.info/balance?active=16ugnJ7pndAFJJfMwoSDFbNTwzHvxhL1cL</div></pre></td></tr></table></figure>
+<h4 id="Response-Json"><a href="#Response-Json" class="headerlink" title="Response Json:"></a>Response Json:</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  &quot;mkkjcX4s4zoJJaE5E1NnfvsbuMvmzgBWTo&quot;: &#123;</div><div class="line">    &quot;final_balance&quot;: 45751300,</div><div class="line">    &quot;n_tx&quot;: 4,</div><div class="line">    &quot;total_received&quot;: 67759400</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>获取当前钱包的未交易区块</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>request</th>
+<th>method</th>
+<th>params</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>/unspent</td>
+<td>GET</td>
+<td>String address</td>
+</tr>
+</tbody>
+</table>
+<h4 id="Request-eg-1"><a href="#Request-eg-1" class="headerlink" title="Request eg:"></a>Request eg:</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">https://blockchain.info/unspent?active=16ugnJ7pndAFJJfMwoSDFbNTwzHvxhL1cL</div></pre></td></tr></table></figure>
+<h4 id="Response-Json-1"><a href="#Response-Json-1" class="headerlink" title="Response Json:"></a>Response Json:</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  &quot;unspent_outputs&quot;: [</div><div class="line">    &#123;</div><div class="line">      &quot;tx_hash&quot;: &quot;00d93386605c079daf75d4854e0daf7f5374960968564e1343bf0e74e188c523&quot;,</div><div class="line">    &quot;tx_hash_big_endian&quot;: &quot;23c588e1740ebf43134e5668099674537faf0d4e85d475af9d075c608633d900&quot;,</div><div class="line">    &quot;tx_index&quot;: 286558506,</div><div class="line">    &quot;tx_output_n&quot;: 1,</div><div class="line">    &quot;script&quot;: &quot;76a9143973ddc5132ab11263c508c9ebc4d2f5cc1d53dc88ac&quot;,</div><div class="line">    &quot;value&quot;: 32991900,</div><div class="line">    &quot;value_hex&quot;: &quot;01f76a9c&quot;,</div><div class="line">    &quot;confirmations&quot;: 201</div><div class="line">    &#125;,</div><div class="line">    &#123;</div><div class="line">      &quot;tx_hash&quot;: &quot;bc6bcf2517226f8b408bf54fcdcd906c6a2e3161e9779c6edfb410ad434b6e05&quot;,</div><div class="line">      &quot;tx_hash_big_endian&quot;: &quot;056e4b43ad10b4df6e9c77e961312e6a6c90cdcd4ff58b408b6f221725cf6bbc&quot;,</div><div class="line">      &quot;tx_index&quot;: 286564143,</div><div class="line">      &quot;tx_output_n&quot;: 1,</div><div class="line">      &quot;script&quot;: &quot;76a9143973ddc5132ab11263c508c9ebc4d2f5cc1d53dc88ac&quot;,</div><div class="line">      &quot;value&quot;: 100000,</div><div class="line">      &quot;value_hex&quot;: &quot;0186a0&quot;,</div><div class="line">      &quot;confirmations&quot;: 166</div><div class="line">    &#125;,</div><div class="line">    &#123;</div><div class="line">      &quot;tx_hash&quot;: &quot;f1bf14c0a1fe464fa515474e5e641068de195285697b8124bb04fd1b6b80613b&quot;,</div><div class="line">      &quot;tx_hash_big_endian&quot;: &quot;3b61806b1bfd04bb24817b69855219de6810645e4e4715a54f46fea1c014bff1&quot;,</div><div class="line">      &quot;tx_index&quot;: 286573251,</div><div class="line">      &quot;tx_output_n&quot;: 81,</div><div class="line">      &quot;script&quot;: &quot;76a9143973ddc5132ab11263c508c9ebc4d2f5cc1d53dc88ac&quot;,</div><div class="line">      &quot;value&quot;: 12659400,</div><div class="line">      &quot;value_hex&quot;: &quot;00c12ac8&quot;,</div><div class="line">      &quot;confirmations&quot;: 116</div><div class="line">    &#125;</div><div class="line">  ]</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>发送交易</li>
+</ul>
+<h5 id="1-BlockChain方式"><a href="#1-BlockChain方式" class="headerlink" title="1.BlockChain方式"></a>1.BlockChain方式</h5><table>
+<thead>
+<tr>
+<th>request</th>
+<th>method</th>
+<th>params</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>/pushtx</td>
+<td>POST</td>
+<td>String tx</td>
+</tr>
+</tbody>
+</table>
+<h4 id="Request-eg-2"><a href="#Request-eg-2" class="headerlink" title="Request eg:"></a>Request eg:</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">https://blockchain.info/pushtx</div></pre></td></tr></table></figure>
+<p>Request Json:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">&quot;tx&quot;:&quot;0100000001e172ca12c41990eb0114a3f37eb2c566c0d858bde5a83bd663fcfde20c4c5d41010000008a47304402200cdae056ea0ba22cfb6c066a4e795cabd4dd89a2b9707142e835f1a91e20612e0220381e40ab9fbfa3deea6ef74cec18af8c4827a2bdcc8453439bac69f08e69b0ab8141048fe10b91d8c6f250d2016376e82c31658e7227fdeaa463f64cf868eb3c90e3e184d7e08179e7dc87a02f8fae8e375c72db1dbef93e204fbec93c016590f53b8dffffffff02d00700000000000017a9148669d6028a8e274d7610c3f111ac2c68d855ddb087a00f0000000000001976a91440cf7765cd74dee5113c5a71637731c5704be71b88ac00000000&quot;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="Response-Json-2"><a href="#Response-Json-2" class="headerlink" title="Response Json:"></a>Response Json:</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Transaction Submitted</div></pre></td></tr></table></figure>
+<h5 id="2-BTC-com方式"><a href="#2-BTC-com方式" class="headerlink" title="2. BTC.com方式"></a>2. BTC.com方式</h5><table>
+<thead>
+<tr>
+<th>request</th>
+<th>method</th>
+<th>params</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>/tools/tx-publish</td>
+<td>POST</td>
+<td>String tx</td>
+</tr>
+</tbody>
+</table>
+<h4 id="Request-eg-3"><a href="#Request-eg-3" class="headerlink" title="Request eg:"></a>Request eg:</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">https://chain.api.btc.com/v3/tools/tx-publish</div></pre></td></tr></table></figure>
+<p>Request Json:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">&quot;rawhex&quot;:&quot;0100000001e172ca12c41990eb0114a3f37eb2c566c0d858bde5a83bd663fcfde20c4c5d41010000008a47304402200cdae056ea0ba22cfb6c066a4e795cabd4dd89a2b9707142e835f1a91e20612e0220381e40ab9fbfa3deea6ef74cec18af8c4827a2bdcc8453439bac69f08e69b0ab8141048fe10b91d8c6f250d2016376e82c31658e7227fdeaa463f64cf868eb3c90e3e184d7e08179e7dc87a02f8fae8e375c72db1dbef93e204fbec93c016590f53b8dffffffff02d00700000000000017a9148669d6028a8e274d7610c3f111ac2c68d855ddb087a00f0000000000001976a91440cf7765cd74dee5113c5a71637731c5704be71b88ac00000000&quot;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="Response-Json-3"><a href="#Response-Json-3" class="headerlink" title="Response Json:"></a>Response Json:</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">&quot;data&quot;:&quot;bb04726d203dc8aba0a91dbf20344ba05cf058929a5833d0b9cfdecac0b07d39&quot;,</div><div class="line">&quot;err_no&quot;:0,</div><div class="line">&quot;err_msg&quot;:null</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>获取交易记录</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>request</th>
+<th>method</th>
+<th>params</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>/rawaddr/{address}</td>
+<td>GET</td>
+<td>String address</td>
+</tr>
+</tbody>
+</table>
+<h4 id="Request-eg-4"><a href="#Request-eg-4" class="headerlink" title="Request eg:"></a>Request eg:</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">https://blockchain.info/rawaddr/16ugnJ7pndAFJJfMwoSDFbNTwzHvxhL1cL</div></pre></td></tr></table></figure>
+<h4 id="Response-Json-4"><a href="#Response-Json-4" class="headerlink" title="Response Json:"></a>Response Json:</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">        &quot;hash160&quot;:&quot;40cf7765cd74dee5113c5a71637731c5704be71b&quot;,</div><div class="line">        &quot;address&quot;:&quot;16ugnJ7pndAFJJfMwoSDFbNTwzHvxhL1cL&quot;,</div><div class="line">        &quot;n_tx&quot;:25,</div><div class="line">        &quot;total_received&quot;:2035000,</div><div class="line">        &quot;total_sent&quot;:2030000,</div><div class="line">        &quot;final_balance&quot;:5000,</div><div class="line">        &quot;txs&quot;:[</div><div class="line">    </div><div class="line">    &#123;</div><div class="line">       &quot;ver&quot;:1,</div><div class="line">       &quot;inputs&quot;:[ ...],</div><div class="line">       &quot;weight&quot;:1020</div><div class="line">       &quot;relayed_by&quot;:&quot;127.0.0.1&quot;,</div><div class="line">       &quot;out&quot;:[ ...],</div><div class="line">       &quot;lock_time&quot;:0,</div><div class="line">       &quot;result&quot;:0,</div><div class="line">       &quot;size&quot;:255,</div><div class="line">       &quot;time&quot;:1542685297,</div><div class="line">       &quot;tx_index&quot;:390942774,</div><div class="line">       &quot;vin_sz&quot;:1,</div><div class="line">       &quot;hash&quot;:&quot;20dbd629ed8150f3524964f03d3a82c096b00382e9e7ab4ee74d6d659fe5df83&quot;,</div><div class="line">       &quot;vout_sz&quot;:2</div><div class="line">    &#125;,...]</div></pre></td></tr></table></figure>
+<ul>
+<li>获取当前交易区块的状态（You can also request the transaction to return in binary form (Hex encoded) using ?format=hex）</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>request</th>
+<th>method</th>
+<th>params</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>/rawtx/{tx_hash}</td>
+<td>GET</td>
+<td>String tx_hash</td>
+</tr>
+</tbody>
+</table>
+<h4 id="Request-eg-5"><a href="#Request-eg-5" class="headerlink" title="Request eg:"></a>Request eg:</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">https://blockchain.info/rawtx/bb04726d203dc8aba0a91dbf20344ba05cf058929a5833d0b9cfdecac0b07d39</div></pre></td></tr></table></figure>
+<h4 id="Response-Json-5"><a href="#Response-Json-5" class="headerlink" title="Response Json:"></a>Response Json:</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div></pre></td><td class="code"><pre><div class="line"> </div><div class="line">&#123;</div><div class="line">   &quot;ver&quot;:1,</div><div class="line">   &quot;inputs&quot;:[</div><div class="line">      &#123;</div><div class="line">         &quot;sequence&quot;:4294967295,</div><div class="line">         &quot;witness&quot;:&quot;&quot;,</div><div class="line">         &quot;prev_out&quot;:&#123;</div><div class="line">            &quot;spent&quot;:true,</div><div class="line">            &quot;tx_index&quot;:390716851,</div><div class="line">            &quot;type&quot;:0,</div><div class="line">            &quot;addr&quot;:&quot;16ugnJ7pndAFJJfMwoSDFbNTwzHvxhL1cL&quot;,</div><div class="line">            &quot;value&quot;:22000,</div><div class="line">            &quot;n&quot;:1,</div><div class="line">            &quot;script&quot;:&quot;76a91440cf7765cd74dee5113c5a71637731c5704be71b88ac&quot;</div><div class="line">         &#125;,</div><div class="line">         &quot;script&quot;:&quot;483045022100c0e0e06729bd983db98d3107bf5da585f928e659cfc749b1ae63ac84441dc5700220020568b0475029b177904faedeec327fc867166be52cc13e178b3afbbc55d99a8141048fe10b91d8c6f250d2016376e82c31658e7227fdeaa463f64cf868eb3c90e3e184d7e08179e7dc87a02f8fae8e375c72db1dbef93e204fbec93c016590f53b8d&quot;</div><div class="line">      &#125;</div><div class="line">   ],</div><div class="line">   &quot;weight&quot;:1024,</div><div class="line">   &quot;relayed_by&quot;:&quot;0.0.0.0&quot;,</div><div class="line">   &quot;out&quot;:[</div><div class="line">      &#123;</div><div class="line">         &quot;spent&quot;:false,</div><div class="line">         &quot;tx_index&quot;:390941217,</div><div class="line">         &quot;type&quot;:0,</div><div class="line">         &quot;addr&quot;:&quot;3DwjFrvc6avJeUJ6hG54WoSp3p2cVM4xwc&quot;,</div><div class="line">         &quot;value&quot;:20000,</div><div class="line">         &quot;n&quot;:0,</div><div class="line">         &quot;script&quot;:&quot;a9148669d6028a8e274d7610c3f111ac2c68d855ddb087&quot;</div><div class="line">      &#125;,</div><div class="line">      &#123;</div><div class="line">         &quot;spent&quot;:false,</div><div class="line">         &quot;tx_index&quot;:390941217,</div><div class="line">         &quot;type&quot;:0,</div><div class="line">         &quot;addr&quot;:&quot;16ugnJ7pndAFJJfMwoSDFbNTwzHvxhL1cL&quot;,</div><div class="line">         &quot;value&quot;:1000,</div><div class="line">         &quot;n&quot;:1,</div><div class="line">         &quot;script&quot;:&quot;76a91440cf7765cd74dee5113c5a71637731c5704be71b88ac&quot;</div><div class="line">      &#125;</div><div class="line">   ],</div><div class="line">   &quot;lock_time&quot;:0,</div><div class="line">   &quot;size&quot;:256,</div><div class="line">   &quot;double_spend&quot;:false,</div><div class="line">   &quot;time&quot;:1542684716,</div><div class="line">   &quot;tx_index&quot;:390941217,</div><div class="line">   &quot;vin_sz&quot;:1,</div><div class="line">   &quot;hash&quot;:&quot;bb04726d203dc8aba0a91dbf20344ba05cf058929a5833d0b9cfdecac0b07d39&quot;,</div><div class="line">   &quot;vout_sz&quot;:2</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Android/" rel="tag"># Android</a>
+          
+            <a href="/tags/BlockChain/" rel="tag"># BlockChain</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/03/05/Binance-K线图接入/" rel="next" title="Binance K线图接入">
+                <i class="fa fa-chevron-left"></i> Binance K线图接入
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/catherine.jpg"
+               alt="Catherine" />
+          <p class="site-author-name" itemprop="name">Catherine</p>
+           
+              <p class="site-description motion-element" itemprop="description">To take the crown,will by heavy!</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/Catherinelhl" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                    
+                      GitHub
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="Catherinelhl0728@gmail.com" target="_blank" title="Google">
+                  
+                    <i class="fa fa-fw fa-google"></i>
+                  
+                    
+                      Google
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/william728" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                    
+                      Weibo
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#BTC-Of-BlockChain"><span class="nav-number">1.</span> <span class="nav-text">BTC Of BlockChain</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#参考文档"><span class="nav-number">1.0.1.</span> <span class="nav-text">参考文档</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#以下两者皆可实现BTC的基本需求"><span class="nav-number">1.0.1.1.</span> <span class="nav-text">以下两者皆可实现BTC的基本需求</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Request-eg"><span class="nav-number">1.1.</span> <span class="nav-text">Request eg:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Response-Json"><span class="nav-number">1.2.</span> <span class="nav-text">Response Json:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Request-eg-1"><span class="nav-number">1.3.</span> <span class="nav-text">Request eg:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Response-Json-1"><span class="nav-number">1.4.</span> <span class="nav-text">Response Json:</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-BlockChain方式"><span class="nav-number">1.4.1.</span> <span class="nav-text">1.BlockChain方式</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Request-eg-2"><span class="nav-number">1.5.</span> <span class="nav-text">Request eg:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Response-Json-2"><span class="nav-number">1.6.</span> <span class="nav-text">Response Json:</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#2-BTC-com方式"><span class="nav-number">1.6.1.</span> <span class="nav-text">2. BTC.com方式</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Request-eg-3"><span class="nav-number">1.7.</span> <span class="nav-text">Request eg:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Response-Json-3"><span class="nav-number">1.8.</span> <span class="nav-text">Response Json:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Request-eg-4"><span class="nav-number">1.9.</span> <span class="nav-text">Request eg:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Response-Json-4"><span class="nav-number">1.10.</span> <span class="nav-text">Response Json:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Request-eg-5"><span class="nav-number">1.11.</span> <span class="nav-text">Request eg:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Response-Json-5"><span class="nav-number">1.12.</span> <span class="nav-text">Response Json:</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Catherine</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Gemini
+  </a>
+</div>
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,866 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Android,BlockChain," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="Web3jWeb3j Github Web3j Doc Web3j是什么？ 是一个轻量级，高度模块化，反应灵敏，类型安全的Java和Android库，用于处理智能合约并与以太坊网络上的客户端（节点）集成。这允许您使用以太坊区块链，而无需为平台编写自己的集成代码的额外开销  Web3j的特征 支持Parity的 Personal和Geth的 个人客户端API 支持Infura，因此您无需亲自运行以太">
+<meta name="keywords" content="Android,BlockChain">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ETH公链接入,Web3j+Infura实现">
+<meta property="og:url" content="http://xcatherine.cn/2019/03/05/ETH公链接入/index.html">
+<meta property="og:site_name" content="Catherine&#39;s world">
+<meta property="og:description" content="Web3jWeb3j Github Web3j Doc Web3j是什么？ 是一个轻量级，高度模块化，反应灵敏，类型安全的Java和Android库，用于处理智能合约并与以太坊网络上的客户端（节点）集成。这允许您使用以太坊区块链，而无需为平台编写自己的集成代码的额外开销  Web3j的特征 支持Parity的 Personal和Geth的 个人客户端API 支持Infura，因此您无需亲自运行以太">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-03-05T12:33:31.052Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ETH公链接入,Web3j+Infura实现">
+<meta name="twitter:description" content="Web3jWeb3j Github Web3j Doc Web3j是什么？ 是一个轻量级，高度模块化，反应灵敏，类型安全的Java和Android库，用于处理智能合约并与以太坊网络上的客户端（节点）集成。这允许您使用以太坊区块链，而无需为平台编写自己的集成代码的额外开销  Web3j的特征 支持Parity的 Personal和Geth的 个人客户端API 支持Infura，因此您无需亲自运行以太">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://xcatherine.cn/2019/03/05/ETH公链接入/"/>
+
+
+
+
+
+  <title>ETH公链接入,Web3j+Infura实现 | Catherine's world</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?50143dd916563cdf11e060b71cbaf79f";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Catherine's world</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Welcome</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/self/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://xcatherine.cn/2019/03/05/ETH公链接入/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Catherine">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/catherine.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Catherine's world">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">ETH公链接入,Web3j+Infura实现</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-05T20:09:11+08:00">
+                2019-03-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/BlockChain/" itemprop="url" rel="index">
+                    <span itemprop="name">BlockChain</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="Web3j"><a href="#Web3j" class="headerlink" title="Web3j"></a>Web3j</h3><p><a href="https://github.com/web3j/web3j" target="_blank" rel="external">Web3j Github</a></p>
+<p><a href="https://web3j.readthedocs.io/en/latest/getting_started.html" target="_blank" rel="external">Web3j Doc</a></p>
+<h4 id="Web3j是什么？"><a href="#Web3j是什么？" class="headerlink" title="Web3j是什么？"></a>Web3j是什么？</h4><blockquote>
+<p>是一个轻量级，高度模块化，反应灵敏，类型安全的Java和Android库，用于处理智能合约并与以太坊网络上的客户端（节点）集成。这允许您使用以太坊区块链，而无需为平台编写自己的集成代码的额外开销</p>
+</blockquote>
+<h4 id="Web3j的特征"><a href="#Web3j的特征" class="headerlink" title="Web3j的特征"></a>Web3j的特征</h4><ul>
+<li>支持Parity的 Personal和Geth的 个人客户端API</li>
+<li>支持Infura，因此您无需亲自运行以太坊客户端</li>
+<li>通过HTTP和IPC 完成以太坊的JSON-RPC客户端API的实现 </li>
+<li>以太坊钱包支持</li>
+<li>自动生成Java智能合约包装器，以便从本机Java代码创建，部署，交易和调用智能合约（支持Solidity 和 Truffle定义格式）</li>
+<li>用于处理过滤器的反应功能API</li>
+<li>以太坊名称服务（ENS）支持</li>
+<li>综合集成测试展示了上述多种场景</li>
+<li>命令行工具</li>
+<li>Android兼容</li>
+<li>通过web3j-quorum支持摩根大通的法定人数</li>
+</ul>
+<h4 id="Web3j可以做什么？"><a href="#Web3j可以做什么？" class="headerlink" title="Web3j可以做什么？"></a>Web3j可以做什么？</h4><ul>
+<li><p>创建钱包</p>
+</li>
+<li><p>加载以太坊钱包文件</p>
+</li>
+<li><p>将ETH从一个地址发送到另一个地址</p>
+</li>
+<li><p>将智能合约部署到网络</p>
+</li>
+<li><p>从已部署的智能合约中读取值</p>
+</li>
+<li><p>更新已部署的智能合约中的值</p>
+</li>
+<li><p>查看智能合约记录的事件</p>
+</li>
+</ul>
+<p>Web3j里面提供了==Geth/Parity==两种私有链。我们这里用==Infura==去启动Geth这种。那么，这里的==Infura==又是什么呢？</p>
+<h3 id="Infura"><a href="#Infura" class="headerlink" title="Infura"></a>Infura</h3><p><a href="https://infura.io" target="_blank" rel="external">Infura</a></p>
+<p><a href="https://web3j.readthedocs.io/en/latest/infura.html" target="_blank" rel="external">Using Infura with Web3j</a></p>
+<ul>
+<li>Infura是什么？<blockquote>
+<p>Infura是一种免费的服务，提供了在云端运行以太坊客户端的能力。</p>
+</blockquote>
+</li>
+<li>Infura可以做什么？<blockquote>
+<p>当我们注册这个服务，它会提供一个token令牌，也就下下面我们会看到的「PROJECT ID」他可以通过Http连接到相关的以太坊网络。<br>目前Infura提供了一个主网，三个测试网络：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">以太网网络/公有链：</div><div class="line"></div><div class="line">https://mainnet.infura.io/&lt;your-token&gt;</div><div class="line"></div><div class="line">以太坊测试网络/测试链(Rinkeby):</div><div class="line"></div><div class="line">https://rinkeby.infura.io/&lt;your-token&gt;</div><div class="line"></div><div class="line">以太坊测试网络/测试链(Kovan):</div><div class="line"></div><div class="line">https://kovan.infura.io/&lt;your-token&gt;</div><div class="line"></div><div class="line">以太坊测试网络/测试链 (Ropsten):</div><div class="line"></div><div class="line">https://ropsten.infura.io/&lt;your-token&gt;</div></pre></td></tr></table></figure>
+</blockquote>
+</li>
+</ul>
+<p>接下来开始我们的ETH +Web3j+Infura接通之旅吧。</p>
+<h4 id="1-创建Infura账号"><a href="#1-创建Infura账号" class="headerlink" title="1. 创建Infura账号"></a>1. 创建Infura账号</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Name:OrangeBlock</div><div class="line">Email:it@orangeblock.tech</div><div class="line">Pwd:qazwsx888</div></pre></td></tr></table></figure>
+<h4 id="2-通过Infura-CREATE-NEW-PROJECT"><a href="#2-通过Infura-CREATE-NEW-PROJECT" class="headerlink" title="2. 通过Infura CREATE NEW PROJECT"></a>2. 通过Infura CREATE NEW PROJECT</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">eg:现在创建了一个「ETHDemo」</div><div class="line">会看到我们页面的左边会生成关于项目的</div><div class="line">PROJECT ID:7c4ebc9898924f0aa003ab19df9c36eb/*项目需要的Token*/</div><div class="line">PROJECT SECRET:26ed4968712b439a80b84250223cd899</div><div class="line">ENPOINT「MAINNET」：https://mainnet.infura.io/v3/7c4ebc9898924f0aa003ab19df9c36eb/*通过Web3j连接到主网ETH的连接地址。*/</div><div class="line"></div><div class="line">上面的ENPOINT「MAINNET就是我们待会项目中需要用到的连接ETH主网的URL</div></pre></td></tr></table></figure>
+<h4 id="3-创建项目"><a href="#3-创建项目" class="headerlink" title="3.创建项目"></a>3.创建项目</h4><p>回到我们的本地项目编辑，先创建一个Android/Java项目，取名同Infura创建项目名一致为：「ETHDemo」。</p>
+<p>首先引入Web3j，这里以Gradle为例：</p>
+<ul>
+<li><p>Java 8:</p>
+<blockquote>
+<p>compile (‘org.web3j:core:4.0.0’)</p>
+</blockquote>
+</li>
+<li><p>Android</p>
+<blockquote>
+<p>compile (‘org.web3j:core:3.3.1-android’)</p>
+</blockquote>
+</li>
+</ul>
+<h4 id="4-离线创建一个ETH钱包元数据"><a href="#4-离线创建一个ETH钱包元数据" class="headerlink" title="4.离线创建一个ETH钱包元数据"></a>4.离线创建一个ETH钱包元数据</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">private static void createAccount() throws NoSuchAlgorithmException,</div><div class="line">            NoSuchProviderException, InvalidAlgorithmParameterException,</div><div class="line">            CipherException, IOException &#123;</div><div class="line">           NoSuchProviderException, InvalidAlgorithmParameterException,</div><div class="line">            CipherException, IOException &#123;</div><div class="line">        String walletFileName = &quot;&quot;;//文件名</div><div class="line">        String walletFilePath = &quot;/Users/catherine.brainwilliam/AndroidOBTExample/eth_wallet_keystore&quot;;</div><div class="line">        //钱包文件保持路径，请替换位自己的某文件夹路径</div><div class="line"></div><div class="line">        walletFileName = WalletUtils.generateNewWalletFile(Constants.password, new File(walletFilePath), true);</div><div class="line">        System.out.println(&quot;walletName: &quot; + walletFileName);</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<h5 id="Response-："><a href="#Response-：" class="headerlink" title="Response ："></a>Response ：</h5><p>如果创建成功，那么就可以在给定的文件夹下面看到相关的创建文件，文件内容如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  address&quot;: 07757733653a6670a4f7b8d30704378cb4cf89b2&quot;,//地址 (base64)格式</div><div class="line">  id&quot;: 428e5938-f0b3...&quot;,</div><div class="line">  version&quot;: 3,</div><div class="line">  crypto&quot;&quot;: &#123;</div><div class="line">    &quot;cipher&quot;: &quot;aes-128-ctr&quot;,</div><div class="line">    &quot;ciphertext&quot;: &quot;275e9e1c3...&quot;,</div><div class="line">    &quot;cipherparams&quot;: &#123;...  &#125;,</div><div class="line">    &quot;kdf&quot;: &quot;scrypt&quot;,</div><div class="line">    &quot;kdfparams&quot;: &#123;</div><div class="line">     ...</div><div class="line">    &#125;,</div><div class="line">    &quot;mac: &quot;1b2062c587a...&quot;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h4 id="5-根据元数据Keystore解析钱包"><a href="#5-根据元数据Keystore解析钱包" class="headerlink" title="5.根据元数据Keystore解析钱包"></a>5.根据元数据Keystore解析钱包</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">private static void loadWallet() throws IOException, CipherException &#123;</div><div class="line">        String walletFilePath = &quot;/Users/catherine.brainwilliam/AndroidOBTExample/eth_wallet_keystore/UTC--2018-11-15T11-31-38.809--07757733653a6670a4f7b8d30704378cb4cf89b2.json&quot;;</div><div class="line">        Credentials credentials = WalletUtils.loadCredentials(Constants.password, walletFilePath);</div><div class="line">        String address = credentials.getAddress();</div><div class="line">        BigInteger publicKey = credentials.getEcKeyPair().getPublicKey();</div><div class="line">        BigInteger privateKey = credentials.getEcKeyPair().getPrivateKey();</div><div class="line"></div><div class="line">        System.out.println(&quot;address=&quot; + address);</div><div class="line">        System.out.println(&quot;public key=&quot; + publicKey);</div><div class="line">        System.out.println(&quot;private key=&quot; + privateKey);</div></pre></td></tr></table></figure>
+<p>如果成功解析，那么就会看到输出台日志如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">address=0x07757733653a6670a4f7b8d30704378cb4cf89b2</div><div class="line">public key=17365405121258...</div><div class="line">private key=101233875…</div></pre></td></tr></table></figure></p>
+<p>好，现在我们成功创建了钱包，并且拿到了钱包信息，接下来我们需要通过Web3j连接ETH客户端了。</p>
+<h4 id="6-连接Eth客户端"><a href="#6-连接Eth客户端" class="headerlink" title="6.连接Eth客户端"></a>6.连接Eth客户端</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"> web3j = Web3jFactory.build(new HttpService(&quot;https://mainnet.infura.io/v3/7c4ebc9898924f0aa003ab19df9c36eb&quot;));//取Infura上面得到的ENPOINT「MAINNET」进行连接</div><div class="line">web3j.web3ClientVersion().send().getWeb3ClientVersion()// 得到客户端信息</div></pre></td></tr></table></figure>
+<h5 id="Response-：-1"><a href="#Response-：-1" class="headerlink" title="Response ："></a>Response ：</h5><p>返回当前的Geth版本：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Geth/v1.8.15-omnibus-255989da/linux-amd64/go1.10.1&quot;</div></pre></td></tr></table></figure></p>
+<p>看到以上信息，那么我们就连接成功了。接下来，我们就可以根据需求去获取ETH的相关数据了。</p>
+<h4 id="获取余额"><a href="#获取余额" class="headerlink" title="获取余额"></a>获取余额</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">web3j.ethGetBalance(Constants.address, DefaultBlockParameterName.LATEST).sendAsync</div></pre></td></tr></table></figure>
+<h5 id="Response-：-2"><a href="#Response-：-2" class="headerlink" title="Response ："></a>Response ：</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">返回 EthGetBalance 对象</div><div class="line">//格式转化 wei-ether</div><div class="line">String balanceETH = Convert.fromWei(ethGetBalance.getBalance().toString(), Convert.Unit.ETHER).toPlainString().concat(&quot;ether&quot;);</div></pre></td></tr></table></figure>
+<h4 id="push交易"><a href="#push交易" class="headerlink" title="push交易"></a>push交易</h4><ol>
+<li>method Fir:默认用Web3j提供的GasPriceu 以及GasLimit。</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Transfer.sendFunds(web3j, credentials, addressTo, amount, Convert.Unit.ETHER).send()</div></pre></td></tr></table></figure>
+<ol>
+<li>method Sec:自定义Gas额度<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">TransactionManager transactionManager = new RawTransactionManager(web3j, credentials);</div><div class="line">        Transfer transfer = new Transfer(web3j, transactionManager);</div><div class="line">transfer.sendFunds(addressTo, amount, Convert.Unit.ETHER, gasPrice, BigInteger.valueOf(21000).send&quot;</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<h5 id="Response-：-3"><a href="#Response-：-3" class="headerlink" title="Response ："></a>Response ：</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">transactionReceipt.getTransactionHash() 获取此次交易的hash</div></pre></td></tr></table></figure>
+<h4 id="获取交易记录"><a href="#获取交易记录" class="headerlink" title="获取交易记录"></a>获取交易记录</h4><p>Infura暂时没有提供根据address获取交易列表信息，<br>所以这里直接通过<br><a href="https://etherscan.io/apis#accounts" target="_blank" rel="external">Etherscan.io</a>去获取交易列表<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">http://api.etherscan.io/api?module=account&amp;action=txlist&amp;address=0xddbd2b932c763ba5b1b7ae3b362eac3e8d40121a&amp;startblock=0&amp;endblock=99999999&amp;sort=asc&amp;apikey=YourApiKeyToken</div></pre></td></tr></table></figure></p>
+<h5 id="Response-：-4"><a href="#Response-：-4" class="headerlink" title="Response ："></a>Response ：</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">&quot;status&quot;: &quot;1&quot;,</div><div class="line">&quot;message&quot;&quot;: &quot;OK,</div><div class="line">&quot;result: [</div><div class="line">&#123;</div><div class="line">&quot;blockNumber: &quot;6749184,//區塊高度</div><div class="line">&quot;timeStamp&quot;: &quot;&quot;1542853986&quot;,//時間戳</div><div class="line">&quot;hash&quot;: &quot;0x30eade438fc33f5de3c03514d760cde3fdefdbe343fd323508f51d3d3a2c9558,//交易哈希值</div><div class="line">&quot;nonce&quot;: &quot;4&quot;,//随机数 &amp; &#123;位置&#125;</div><div class="line">&quot;blockHash&quot;: &quot;0xd2c98ca81410d2b6a279c63ae9044edae8497745af1c53b544f9794a341eb52a&quot;,//區塊的hash值</div><div class="line">&quot;transactionIndex&quot;: &quot;139&quot;,</div><div class="line">&quot;from&quot;: &quot;0x5836cc7b00696fd24e33f01c85f50371d87e9fd0&quot;,//發送方的帳戶地址</div><div class="line">&quot;to&quot;: &quot;0x07757733653a6670a4f7b8d30704378cb4cf89b2&quot;,//接收方的帳戶地址</div><div class="line">&quot;value&quot;: &quot;1000000000000000&quot;,//交易金額</div><div class="line">&quot;gas&quot;: &quot;21000&quot;,//燃料限制==gasLimit</div><div class="line">&quot;gasPrice&quot;: &quot;4000000000&quot;,//當前燃料的價格（默認Gwei為單位1E-9）</div><div class="line">&quot;isError&quot;: &quot;0&quot;,</div><div class="line">&quot;txreceipt_status&quot;: &quot;1&quot;,//數據狀態</div><div class="line">&quot;input&quot;: &quot;&quot;0x&quot;,//數據輸入（base64格式）</div><div class="line">&quot;contractAddress&quot;: &quot;&quot;&quot;,//合約地址</div><div class="line">&quot;cumulativeGasUsed&quot;: &quot;&quot;5878239,//累積交易燃料費用</div><div class="line">&quot;gasUsed&quot;: &quot;21000&quot;,//交易燃料费用</div><div class="line">&quot;confirmations&quot;: &quot;224&quot;//區塊確認數</div><div class="line">&#125;,&#123;...&#125;</div><div class="line">]&quot;</div></pre></td></tr></table></figure>
+<h4 id="获取交易状态"><a href="#获取交易状态" class="headerlink" title="获取交易状态"></a>获取交易状态</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">web3j.ethGetTransactionByHash(transactionHash).send();</div></pre></td></tr></table></figure>
+<h5 id="Response-：-5"><a href="#Response-：-5" class="headerlink" title="Response ："></a>Response ：</h5><p>返回：EthTransaction 对象<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">EthTransaction ethTransaction = ethTransactionFuture.get();</div><div class="line">Transaction transaction = ethTransaction.getTransaction();</div><div class="line"></div><div class="line">//transaction.getBlockNumber(): 區塊高度</div><div class="line">//transaction.getBlockHash() :  區塊hash</div><div class="line">//transaction.getGasPrice():    燃料價格</div><div class="line">//transaction.getGasRaw():      燃料限制</div><div class="line">//transaction.getHash():        交易hash</div><div class="line">//transaction.getInput():       輸入內容</div></pre></td></tr></table></figure></p>
+<p><a href="https://www.rinkeby.io/#faucet" target="_blank" rel="external">Tesetnet Ethereum</a></p>
+<p><strong><em>知识点</em></strong></p>
+<p>GasPrice:燃料价格。当前ETH坊 gas 的价格，可以直接通过API动态获取。默认单位是GWEI.</p>
+<p>GasLimit:燃料限制。表示gas的个数，表示当前address愿意消耗Gas的最大个数。ETH坊最低是21000，所以，我们设置此参数应该&gt;=21000.</p>
+<p>GasUsed:实际消耗的Gas 个数。应该&lt;=GasLimit.所以如果用户给定的GasLimit=当前ETH的最小限定值（21000），那么就会100%的用上。</p>
+<p>GasFee:实际支付的矿工费GasPrice * GasUsed;</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Android/" rel="tag"># Android</a>
+          
+            <a href="/tags/BlockChain/" rel="tag"># BlockChain</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/07/06/Kotlin-之高阶函数let-apply等区别已经使用场景/" rel="next" title="Kotlin 之高阶函数let/apply等区别已经使用场景">
+                <i class="fa fa-chevron-left"></i> Kotlin 之高阶函数let/apply等区别已经使用场景
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/03/05/CoinMarketCap-数据接入/" rel="prev" title="CoinMarketCap 数据接入">
+                CoinMarketCap 数据接入 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/catherine.jpg"
+               alt="Catherine" />
+          <p class="site-author-name" itemprop="name">Catherine</p>
+           
+              <p class="site-description motion-element" itemprop="description">To take the crown,will by heavy!</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/Catherinelhl" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                    
+                      GitHub
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="Catherinelhl0728@gmail.com" target="_blank" title="Google">
+                  
+                    <i class="fa fa-fw fa-google"></i>
+                  
+                    
+                      Google
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/william728" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                    
+                      Weibo
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Web3j"><span class="nav-number">1.</span> <span class="nav-text">Web3j</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Web3j是什么？"><span class="nav-number">1.1.</span> <span class="nav-text">Web3j是什么？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Web3j的特征"><span class="nav-number">1.2.</span> <span class="nav-text">Web3j的特征</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Web3j可以做什么？"><span class="nav-number">1.3.</span> <span class="nav-text">Web3j可以做什么？</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Infura"><span class="nav-number">2.</span> <span class="nav-text">Infura</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-创建Infura账号"><span class="nav-number">2.1.</span> <span class="nav-text">1. 创建Infura账号</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-通过Infura-CREATE-NEW-PROJECT"><span class="nav-number">2.2.</span> <span class="nav-text">2. 通过Infura CREATE NEW PROJECT</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-创建项目"><span class="nav-number">2.3.</span> <span class="nav-text">3.创建项目</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-离线创建一个ETH钱包元数据"><span class="nav-number">2.4.</span> <span class="nav-text">4.离线创建一个ETH钱包元数据</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Response-："><span class="nav-number">2.4.1.</span> <span class="nav-text">Response ：</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-根据元数据Keystore解析钱包"><span class="nav-number">2.5.</span> <span class="nav-text">5.根据元数据Keystore解析钱包</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-连接Eth客户端"><span class="nav-number">2.6.</span> <span class="nav-text">6.连接Eth客户端</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Response-：-1"><span class="nav-number">2.6.1.</span> <span class="nav-text">Response ：</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#获取余额"><span class="nav-number">2.7.</span> <span class="nav-text">获取余额</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Response-：-2"><span class="nav-number">2.7.1.</span> <span class="nav-text">Response ：</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#push交易"><span class="nav-number">2.8.</span> <span class="nav-text">push交易</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Response-：-3"><span class="nav-number">2.8.1.</span> <span class="nav-text">Response ：</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#获取交易记录"><span class="nav-number">2.9.</span> <span class="nav-text">获取交易记录</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Response-：-4"><span class="nav-number">2.9.1.</span> <span class="nav-text">Response ：</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#获取交易状态"><span class="nav-number">2.10.</span> <span class="nav-text">获取交易状态</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Response-：-5"><span class="nav-number">2.10.1.</span> <span class="nav-text">Response ：</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Catherine</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Gemini
+  </a>
+</div>
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
